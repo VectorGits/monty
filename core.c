@@ -14,12 +14,14 @@ void parse_line(monty_program_t *program_ptr)
 	char *token;
 	char *endptr;
 	long arg;
-	char *comment;
+	char *line;
 
-	comment = strchr(program_ptr->current_line, '#');
-	if (comment != NULL)
+	line = program_ptr->current_line;
+	while (*line == ' ') line++;
+	if (*line == '#' || *line == '\0')
 	{
-		*comment = '\0';
+		program_ptr->current_opcode = NULL;
+		return;
 	}
 	token = strtok(program_ptr->current_line, " \n\t");
 	if (token == NULL)
@@ -76,6 +78,14 @@ void execute_opcode(monty_program_t *program_ptr)
 		add_opcode(program_ptr);
 	else if (strcmp(program_ptr->current_opcode, "nop") == 0)
 		nop_opcode(program_ptr);
+	else if (strcmp(program_ptr->current_opcode, "sub") == 0)
+		sub_opcode(program_ptr);
+	else if (strcmp(program_ptr->current_opcode, "div") == 0)
+		div_opcode(program_ptr);
+	else if (strcmp(program_ptr->current_opcode, "mul") == 0)
+		mul_opcode(program_ptr);
+	else if (strcmp(program_ptr->current_opcode, "mod") == 0)
+		mod_opcode(program_ptr);
 	else
 	{
 		fprintf(stderr, "L%d: unknown instruction %s\n",

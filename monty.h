@@ -74,15 +74,21 @@ void parse_line(monty_program_t *program_ptr);
 void execute_opcode(monty_program_t *program_ptr);
 void free_stack(stack_t *stack);
 
-/* opcodes.c */
+/* 1-opcodes.c */
 void push_opcode(monty_program_t *program_ptr);
 void pall_opcode(monty_program_t *program_ptr);
 void pint_opcode(monty_program_t *program_ptr);
 void pop_opcode(monty_program_t *program_ptr);
 void swap_opcode(monty_program_t *program_ptr);
 
-/* more_opcodes.c */
+/* 2-opcodes.c */
 void add_opcode(monty_program_t *program_ptr);
 void nop_opcode(monty_program_t *program_ptr);
+void sub_opcode(monty_program_t *program_ptr);
+void div_opcode(monty_program_t *program_ptr);
+void mul_opcode(monty_program_t *program_ptr);
+
+/* 3-opcodes.c */
+void mod_opcode(monty_program_t *program_ptr);
 
 #endif /* MONTY_H */
