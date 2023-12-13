@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include <ctype.h>
 
 /* Data Structures */
@@ -46,6 +47,7 @@ typedef struct instruction_s
  * @current_line: Current line from the file
  * @current_opcode: Current opcode being executed
  * @current_arg: Current argument for the opcode, if applicable
+ * @error_flag: Flag to indicate an error
  *
  * Description: Holds all the necessary information to manage a Monty
  * bytecode script, including the state of the stack, the current
@@ -60,6 +62,7 @@ typedef struct monty_program_s
 	char *current_line;
 	char *current_opcode;
 	int current_arg;
+	bool error_flag;
 } monty_program_t;
 
 extern monty_program_t program;

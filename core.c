@@ -13,9 +13,14 @@ void parse_line(monty_program_t *program_ptr)
 {
 	char *token;
 	char *endptr;
-	int arg;
+	long arg;
+	char *comment;
 
-
+	comment = strchr(program_ptr->current_line, '#');
+	if (comment != NULL)
+	{
+		*comment = '\0';
+	}
 	token = strtok(program_ptr->current_line, " \n\t");
 	if (token == NULL)
 	{
@@ -23,21 +28,23 @@ void parse_line(monty_program_t *program_ptr)
 		return;
 	}
 	program_ptr->current_opcode = token;
-	token = strtok(NULL, " \n\t");
-	if (token != NULL)
+	if (strcmp(program_ptr->current_opcode, "push") == 0)
 	{
-		arg = (int)strtol(token, &endptr, 10);
-		if (*endptr != '\0' || !isdigit(*token))
+		token = strtok(NULL, " \n\t");
+		if (token == NULL)
 		{
 			fprintf(stderr, "L%d: usage: push integer\n",
 				program_ptr->line_num);
 			exit(EXIT_FAILURE);
 		}
-		program_ptr->current_arg = arg;
-	}
-	else
-	{
-		program_ptr->current_arg = 0;
+		arg = strtol(token, &endptr, 10);
+		if (*endptr != '\0' || token == endptr)
+		{
+			fprintf(stderr, "L%d: usage: push integer\n",
+				program_ptr->line_num);
+			exit(EXIT_FAILURE);
+		}
+		program_ptr->current_arg = (int)arg;
 	}
 }
 
