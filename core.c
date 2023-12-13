@@ -61,21 +61,15 @@ void parse_line(monty_program_t *program_ptr)
 void execute_opcode(monty_program_t *program_ptr)
 {
 	if (program_ptr->current_opcode == NULL)
-	{
 		return;
-	}
 	if (strcmp(program_ptr->current_opcode, "push") == 0)
-	{
 		push_opcode(program_ptr);
-	}
 	else if (strcmp(program_ptr->current_opcode, "pall") == 0)
-	{
 		pall_opcode(program_ptr);
-	}
 	else if (strcmp(program_ptr->current_opcode, "pint") == 0)
-	{
 		pint_opcode(program_ptr);
-	}
+	else if (strcmp(program_ptr->current_opcode, "pop") == 0)
+		pop_opcode(program_ptr);
 	else
 	{
 		fprintf(stderr, "L%d: unknown instruction %s\n",

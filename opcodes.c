@@ -73,3 +73,30 @@ void pint_opcode(monty_program_t *program_ptr)
 	}
 	printf("%d\n", program_ptr->stack->n);
 }
+
+/**
+ * pop_opcode - Pops the top element off the stack
+ * @program_ptr: Pointer to the monty_program_t struct
+ *
+ * Description: This function removes the top element from the stack.
+ * If the stack is empty, it prints an error message and exits the program.
+ * It handles the removal and proper memory deallocation of the top element.
+ */
+void pop_opcode(monty_program_t *program_ptr)
+{
+	stack_t *temp;
+
+	if (program_ptr->stack == NULL)
+	{
+		fprintf(stderr, "L%d: can't pop an empty stack\n",
+			program_ptr->line_num);
+		exit(EXIT_FAILURE);
+	}
+	temp = program_ptr->stack;
+	program_ptr->stack = program_ptr->stack->next;
+	if (program_ptr->stack != NULL)
+	{
+		program_ptr->stack->prev = NULL;
+	}
+	free(temp);
+}
