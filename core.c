@@ -70,6 +70,12 @@ void execute_opcode(monty_program_t *program_ptr)
 		pint_opcode(program_ptr);
 	else if (strcmp(program_ptr->current_opcode, "pop") == 0)
 		pop_opcode(program_ptr);
+	else if (strcmp(program_ptr->current_opcode, "swap") == 0)
+		swap_opcode(program_ptr);
+	else if (strcmp(program_ptr->current_opcode, "add") == 0)
+		add_opcode(program_ptr);
+	else if (strcmp(program_ptr->current_opcode, "nop") == 0)
+		nop_opcode(program_ptr);
 	else
 	{
 		fprintf(stderr, "L%d: unknown instruction %s\n",

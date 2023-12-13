@@ -79,5 +79,10 @@ void push_opcode(monty_program_t *program_ptr);
 void pall_opcode(monty_program_t *program_ptr);
 void pint_opcode(monty_program_t *program_ptr);
 void pop_opcode(monty_program_t *program_ptr);
+void swap_opcode(monty_program_t *program_ptr);
+
+/* more_opcodes.c */
+void add_opcode(monty_program_t *program_ptr);
+void nop_opcode(monty_program_t *program_ptr);
 
 #endif /* MONTY_H */

@@ -100,3 +100,31 @@ void pop_opcode(monty_program_t *program_ptr)
 	}
 	free(temp);
 }
+
+/**
+ * swap_opcode - Swaps the top two elements of the stack
+ * @program_ptr: Pointer to the monty_program_t struct
+ *
+ * Description: This function swaps the top two elements on the stack.
+ * If the stack does not have at least two elements, it prints an error
+ * message and exits the program. It handles the re-linking of the stack
+ * nodes to achieve the swap.
+ */
+void swap_opcode(monty_program_t *program_ptr)
+{
+	stack_t *first, *second;
+
+	if (program_ptr->stack == NULL || program_ptr->stack->next == NULL)
+	{
+		fprintf(stderr, "L%d: can't swap, stack too short\n",
+			program_ptr->line_num);
+		exit(EXIT_FAILURE);
+	}
+	first = program_ptr->stack;
+	second = program_ptr->stack->next;
+	first->next = second->next;
+	first->prev = second;
+	second->next = first;
+	second->prev = NULL;
+	program_ptr->stack = second;
+}
