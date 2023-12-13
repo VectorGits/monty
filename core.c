@@ -72,6 +72,10 @@ void execute_opcode(monty_program_t *program_ptr)
 	{
 		pall_opcode(program_ptr);
 	}
+	else if (strcmp(program_ptr->current_opcode, "pint") == 0)
+	{
+		pint_opcode(program_ptr);
+	}
 	else
 	{
 		fprintf(stderr, "L%d: unknown instruction %s\n",

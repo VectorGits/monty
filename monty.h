@@ -74,7 +74,9 @@ void parse_line(monty_program_t *program_ptr);
 void execute_opcode(monty_program_t *program_ptr);
 void free_stack(stack_t *stack);
 
+/* opcodes.c */
 void push_opcode(monty_program_t *program_ptr);
 void pall_opcode(monty_program_t *program_ptr);
+void pint_opcode(monty_program_t *program_ptr);
 
 #endif /* MONTY_H */

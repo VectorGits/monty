@@ -55,3 +55,21 @@ void pall_opcode(monty_program_t *program_ptr)
 		current_node = current_node->next;
 	}
 }
+
+/**
+ * pint_opcode - Prints the value at the top of the stack
+ * @program_ptr: Pointer to the monty_program_t struct
+ *
+ * Description: This function prints the value at the top of the stack.
+ * If the stack is empty, it prints an error message and exits the program.
+ */
+void pint_opcode(monty_program_t *program_ptr)
+{
+	if (program_ptr->stack == NULL)
+	{
+		fprintf(stderr, "L%d: can't pint, stack empty\n",
+			program_ptr->line_num);
+		exit(EXIT_FAILURE);
+	}
+	printf("%d\n", program_ptr->stack->n);
+}
