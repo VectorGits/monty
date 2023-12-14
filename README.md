@@ -1,5 +1,5 @@
 # Monty Interpreter
-11;rgb:0000/0000/0000
+
 ## Project Overview
 
 This project, engineered by David Oluremi, involves the creation of an interpreter for Monty ByteCodes files, a scripting language compiled into byte codes, similar to Python. The key focus is on implementing stacks and queues using C programming language, adhering to the LIFO (Last In, First Out) and FIFO (First In, First Out) principles.
@@ -29,7 +29,7 @@ Below are the data structures used in this project.
   {
       MODE_STACK,
       MODE_QUEUE
-  } mode_t;
+  } stack_mode_t;
 
   typedef struct monty_program_s
   {
@@ -39,7 +39,7 @@ Below are the data structures used in this project.
      char *current_line;
      char *current_opcode;
      int current_arg;
-     mode_t mode;
+     stack_mode_t mode;
   } monty_program_t;
   ```
 
