@@ -1,5 +1,5 @@
 # Monty Interpreter
-
+11;rgb:0000/0000/0000
 ## Project Overview
 
 This project, engineered by David Oluremi, involves the creation of an interpreter for Monty ByteCodes files, a scripting language compiled into byte codes, similar to Python. The key focus is on implementing stacks and queues using C programming language, adhering to the LIFO (Last In, First Out) and FIFO (First In, First Out) principles.
@@ -11,36 +11,37 @@ This project, engineered by David Oluremi, involves the creation of an interpret
 ## Data Structures
 
 Below are the data structures used in this project.
-```c
-typedef struct stack_s
-{
-	int n;
-	struct stack_s *prev;
-	struct stack_s *next;
-} stack_t;
+  ```c
+  typedef struct stack_s
+  {
+      int n;
+      struct stack_s *prev;
+      struct stack_s *next;
+  } stack_t;
 
-typedef struct instruction_s
-{
-	char *opcode;
-	void (*f)(stack_t **stack, unsigned int line_number);
-} instruction_t;
+  typedef struct instruction_s
+  {
+      char *opcode;
+      void (*f)(stack_t **stack, unsigned int line_number);
+  } instruction_t;
 
-typedef enum mode_e
-{
-	MODE_STACK,
-	MODE_QUEUE
-} mode_t;
+  typedef enum
+  {
+      MODE_STACK,
+      MODE_QUEUE
+  } mode_t;
 
-typedef struct monty_program_s
-{
-	stack_t *stack;
-	unsigned int line_num;
-	FILE *script_file;
-	char *current_line;
-	char *current_opcode;
-	int current_arg;
-	mode_t mode;
-} monty_program_t;
+  typedef struct monty_program_s
+  {
+     stack_t *stack;
+     unsigned int line_num;
+     FILE *script_file;
+     char *current_line;
+     char *current_opcode;
+     int current_arg;
+     mode_t mode;
+  } monty_program_t;
+  ```
 
 ## Monty ByteCodes Files
 

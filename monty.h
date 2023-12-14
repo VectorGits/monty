@@ -39,14 +39,14 @@ typedef struct instruction_s
 } instruction_t;
 
 /**
- * enum mode_e - Enumeration for mode types
+ * enum mode_t - Enumeration for mode types
  * @MODE_STACK: Represents stack mode (value 0)
  * @MODE_QUEUE: Represents queue mode (value 1)
  *
  * Description: Enumeration for differentiating between stack and queue modes
  * in the Monty program.
  */
-typedef enum mode_e
+typedef enum
 {
 	MODE_STACK,
 	MODE_QUEUE
@@ -79,6 +79,7 @@ typedef struct monty_program_s
 
 extern monty_program_t program;
 extern monty_program_t *program_ptr;
+extern char **environ;
 
 /* core.c */
 void parse_line(monty_program_t *program_ptr);
