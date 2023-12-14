@@ -1,18 +1,17 @@
 #include "monty.h"
 
 /**
- * push_opcode - Pushes a value onto the stack
+ * push_opcode - Adds a new node to the stack or queue
  * @program_ptr: Pointer to the monty_program_t struct
  *
- * Description: This function creates a new stack node and pushes it onto
- * the stack. It handles the allocation of the new node and updates the
- * stack pointer in the program structure. The function also handles errors
- * in memory allocation and operates differently based on the mode of the
- * program (stack or queue).
+ * Description: This function creates a new stack node and adds it to the
+ * top of the stack in stack mode (LIFO) or to the end of the queue in queue
+ * mode (FIFO). It allocates memory for the new node and handles memory
+ * allocation errors. It also updates the links between nodes accordingly.
  */
 void push_opcode(monty_program_t *program_ptr)
 {
-	stack_t *new_node;
+	stack_t *new_node, *temp;
 
 	new_node = malloc(sizeof(stack_t));
 	if (new_node == NULL)
@@ -21,21 +20,35 @@ void push_opcode(monty_program_t *program_ptr)
 		exit(EXIT_FAILURE);
 	}
 	new_node->n = program_ptr->current_arg;
-	if (program_ptr->mode == 0)
+	new_node->next = NULL;
+	if (program_ptr->mode == MODE_STACK)
 	{
 		new_node->prev = NULL;
-		new_node->next = program_ptr->stack;
 		if (program_ptr->stack != NULL)
 		{
 			program_ptr->stack->prev = new_node;
 		}
+		new_node->next = program_ptr->stack;
 		program_ptr->stack = new_node;
 	}
 	else
 	{
-		/* If your implementation supports queue mode, handle it here */
+		new_node->prev = NULL;
+		if (program_ptr->stack == NULL)
+			program_ptr->stack = new_node;
+		else
+		{
+			temp = program_ptr->stack;
+			while (temp->next != NULL)
+			{
+				temp = temp->next;
+			}
+			temp->next = new_node;
+			new_node->prev = temp;
+		}
 	}
 }
+
 
 /**
  * pall_opcode - Prints all the values on the stack

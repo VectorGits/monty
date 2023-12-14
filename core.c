@@ -17,7 +17,10 @@ void parse_line(monty_program_t *program_ptr)
 	char *line;
 
 	line = program_ptr->current_line;
-	while (*line == ' ') line++;
+	while (*line == ' ')
+	{
+		line++;
+	}
 	if (*line == '#' || *line == '\0')
 	{
 		program_ptr->current_opcode = NULL;
@@ -86,6 +89,18 @@ void execute_opcode(monty_program_t *program_ptr)
 		mul_opcode(program_ptr);
 	else if (strcmp(program_ptr->current_opcode, "mod") == 0)
 		mod_opcode(program_ptr);
+	else if (strcmp(program_ptr->current_opcode, "pchar") == 0)
+		pchar_opcode(program_ptr);
+	else if (strcmp(program_ptr->current_opcode, "pstr") == 0)
+		pstr_opcode(program_ptr);
+	else if (strcmp(program_ptr->current_opcode, "rotl") == 0)
+		rotl_opcode(program_ptr);
+	else if (strcmp(program_ptr->current_opcode, "rotr") == 0)
+		rotr_opcode(program_ptr);
+	else if (strcmp(program_ptr->current_opcode, "stack") == 0)
+		stack_opcode(program_ptr);
+	else if (strcmp(program_ptr->current_opcode, "queue") == 0)
+		queue_opcode(program_ptr);
 	else
 	{
 		fprintf(stderr, "L%d: unknown instruction %s\n",

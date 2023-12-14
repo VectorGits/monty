@@ -39,15 +39,28 @@ typedef struct instruction_s
 } instruction_t;
 
 /**
+ * enum mode_e - Enumeration for mode types
+ * @MODE_STACK: Represents stack mode (value 0)
+ * @MODE_QUEUE: Represents queue mode (value 1)
+ *
+ * Description: Enumeration for differentiating between stack and queue modes
+ * in the Monty program.
+ */
+typedef enum mode_e
+{
+	MODE_STACK,
+	MODE_QUEUE
+} mode_t;
+
+/**
  * struct monty_program_s - Structure for Monty program's information
  * @stack: Pointer to the top of the stack
  * @line_num: Current line number in the script
- * @mode: Mode of operation (0 for stack, 1 for queue)
  * @script_file: File pointer to the Monty bytecode file
  * @current_line: Current line from the file
  * @current_opcode: Current opcode being executed
  * @current_arg: Current argument for the opcode, if applicable
- * @error_flag: Flag to indicate an error
+ * @mode: Mode of operation (MODE_STACK or MODE_QUEUE)
  *
  * Description: Holds all the necessary information to manage a Monty
  * bytecode script, including the state of the stack, the current
@@ -57,17 +70,15 @@ typedef struct monty_program_s
 {
 	stack_t *stack;
 	unsigned int line_num;
-	int mode;
 	FILE *script_file;
 	char *current_line;
 	char *current_opcode;
 	int current_arg;
-	bool error_flag;
+	mode_t mode;
 } monty_program_t;
 
 extern monty_program_t program;
 extern monty_program_t *program_ptr;
-extern char **environ;
 
 /* core.c */
 void parse_line(monty_program_t *program_ptr);
@@ -90,5 +101,13 @@ void mul_opcode(monty_program_t *program_ptr);
 
 /* 3-opcodes.c */
 void mod_opcode(monty_program_t *program_ptr);
+void pchar_opcode(monty_program_t *program_ptr);
+void pstr_opcode(monty_program_t *program_ptr);
+void rotl_opcode(monty_program_t *program_ptr);
+void rotr_opcode(monty_program_t *program_ptr);
+
+/* 4-opcodes.c */
+void stack_opcode(monty_program_t *program_ptr);
+void queue_opcode(monty_program_t *program_ptr);
 
 #endif /* MONTY_H */
