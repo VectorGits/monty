@@ -10,18 +10,37 @@ This project, engineered by David Oluremi, involves the creation of an interpret
 
 ## Data Structures
 
-- **Stack/Queue Node**:
-  ```c
-  typedef struct stack_s {
-      int n;
-      struct stack_s *prev;
-      struct stack_s *next;
-  } stack_t;
+Below are the data structures used in this project.
+```c
+typedef struct stack_s
+{
+	int n;
+	struct stack_s *prev;
+	struct stack_s *next;
+} stack_t;
 
-  typedef struct instruction_s {
-    char *opcode;
-    void (*f)(stack_t **stack, unsigned int line_number);
-  } instruction_t;
+typedef struct instruction_s
+{
+	char *opcode;
+	void (*f)(stack_t **stack, unsigned int line_number);
+} instruction_t;
+
+typedef enum mode_e
+{
+	MODE_STACK,
+	MODE_QUEUE
+} mode_t;
+
+typedef struct monty_program_s
+{
+	stack_t *stack;
+	unsigned int line_num;
+	FILE *script_file;
+	char *current_line;
+	char *current_opcode;
+	int current_arg;
+	mode_t mode;
+} monty_program_t;
 
 ## Monty ByteCodes Files
 
